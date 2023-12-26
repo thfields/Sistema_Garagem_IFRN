@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'todos/home.css' %}" />
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+   
+
+    <title>Safe Car</title>
+</head>
+<body>
+    <header>
+        <a href="{% url "home" %}" class="logo">Safe Car</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href="{% url "todo_list" %}">Painel de veículos</a></li>
+            <li><a href="{% url "todo_create" %}">Adicionar novo veículo</a></li>
+        </ul>
+    </header>
+
+
+    <section class="home" id="home">
+        <div class="home-text">
+            <h1>Safe Car</h1>
+            <h2>Sistema de gerenciamento para seu estacionamento.</h2>
+        </div>
+
+        <div class="home-img">
+            <img src="img/ilustraca.png">
+        </div>
+    </section>   
+    <span class="rodape">Desenvolvido por 👽&🐢</span>
+</body>
+</html>
