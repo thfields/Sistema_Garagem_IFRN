@@ -7,6 +7,17 @@ from django.http import HttpResponseRedirect
 from math import ceil
 
 relacao = []
+#este campo deve ser comentado e descomentado caso queira sertar o banco
+# config = Constante(
+#      carro = 3,
+#      moto = 1,
+#      )
+# config.save()
+# config = Constante(
+#      carro = 3,
+#      moto = 1,
+#      )
+# config.save()
 
 class TudoRelacaoView(TemplateView):
     template_name = 'todos/relacao.html'
