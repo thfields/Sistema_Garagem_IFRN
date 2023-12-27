@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\soeup\Desktop\PROJETO\Sistema_Garagem_IFRN
+set VIRTUAL_ENV=C:\Users\thiago\Documents\IFRN\Período 2\Programação Orientada a Objetos\Projeto_Garagem\Sistema_Garagem_IFRN
 
 if not defined PROMPT set PROMPT=$P$G
 

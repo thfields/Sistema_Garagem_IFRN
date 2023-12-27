@@ -6,39 +6,27 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from math import ceil
 
-# Create your views here.
-
 relacao = []
-
-# config = Constante(
-#      carro = 3,
-#      moto = 1,
-#      )
-# config.save()
-# config = Constante(
-#      carro = 3,
-#      moto = 1,
-#      )
-# config.save()
 
 class TudoRelacaoView(TemplateView):
     template_name = 'todos/relacao.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['itens_relacao'] = relacao  # Passando a lista relacao para o contexto
+        context['itens_relacao'] = relacao
         return context
 
 class TodoHomeView(TemplateView):
-  template_name = 'todos/home.html'
+    template_name = 'todos/home.html'
 
 class TodoListView(ListView):
-  model = Todo
+    model = Todo
   
 class TodoCreateView(CreateView):
-  model = Todo
-  fields = ['placa','tipo', 'andar']
-  success_url = reverse_lazy("todo_list")
-  def form_valid(self, form):
+    model = Todo
+    fields = ['placa', 'tipo', 'andar']
+    success_url = reverse_lazy("todo_list")
+    
+    def form_valid(self, form):
         instance = form.save(commit=False)
         andar = form.cleaned_data['andar']
         tipo = form.cleaned_data['tipo']
@@ -57,6 +45,8 @@ class TodoCreateView(CreateView):
                 andar1.save()
                 relacao.append(instance)
                 return super().form_valid(form)
+            else:
+                form.add_error('andar', 'Este andar já está lotado.')
         
         elif andar == 'Andar 2':
             andar2 = get_object_or_404(Constante, pk=2)
@@ -72,35 +62,36 @@ class TodoCreateView(CreateView):
                 andar2.save()
                 relacao.append(instance)
                 return super().form_valid(form)
+            else:
+                form.add_error('andar', 'Este andar já está lotado.')
         
         return self.form_invalid(form)
+    
+    
 
 class UpdateHoraAndarView(View):
     def get(self, request, pk):
         todo_obj = get_object_or_404(Todo, pk=pk)
         
-        
         if todo_obj.andar == 'Andar 1':
-          andar1 = get_object_or_404(Constante, pk=1)
-          if todo_obj.tipo == 'Carro':
-              andar1.carro += 1
-              andar1.save()
-          elif todo_obj.tipo == 'Motocicleta':
-              andar1.moto += 1
-              andar1.save()
+            andar1 = get_object_or_404(Constante, pk=1)
+            if todo_obj.tipo == 'Carro':
+                andar1.carro += 1
+                andar1.save()
+            elif todo_obj.tipo == 'Motocicleta':
+                andar1.moto += 1
+                andar1.save()
         elif todo_obj.andar == 'Andar 2':
-          andar2 = get_object_or_404(Constante, pk=2)
-          if todo_obj.tipo == 'Carro':
-              andar2.carro += 1
-              andar2.save()
-          elif todo_obj.tipo == 'Motocicleta':
-              andar2.moto += 1
-              andar2.save()
+            andar2 = get_object_or_404(Constante, pk=2)
+            if todo_obj.tipo == 'Carro':
+                andar2.carro += 1
+                andar2.save()
+            elif todo_obj.tipo == 'Motocicleta':
+                andar2.moto += 1
+                andar2.save()
         
-        # Atualizando os campos desejados
-        todo_obj.hora_saida = datetime.now().time()  # Atualiza hora_saida para a hora atual
-        todo_obj.andar = '----'  # Atualiza andar para '----'
-        # Salvando as alterações no banco de dados
+        todo_obj.hora_saida = datetime.now().time()
+        todo_obj.andar = ''
         todo_obj.save()
 
         horario2 = todo_obj.hora_saida
@@ -111,7 +102,5 @@ class UpdateHoraAndarView(View):
         else:
             todo_obj.valor = 5 + (ceil(diferenca_em_horas) - 1) * 2
         todo_obj.save()
-        # Adicionando a representação do objeto à lista após a modificação
         relacao.append(todo_obj)
         return HttpResponseRedirect(reverse_lazy('todo_list'))
-
