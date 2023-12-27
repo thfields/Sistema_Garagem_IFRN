@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'todos/painel.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <title>Safe Car - Painel</title>
+</head>
+
+<body class="corpo">
+    <header class="cabeca">
+        <a href="{% url "home" %}" class="logo">Safe Car</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href="{% url "todo_list" %}">Painel de veículos</a></li>
+            <li><a href="{% url "todo_create" %}">Adicionar novo veículo</a></li>
+        </ul>
+    </header>
+
+
+    <section>
+            <tbody>
+              <ul>
+                {% for item in itens_relacao %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+    </section>
+
+    <span class="rodape">Desenvolvido por 👽&🐢</span>
+
+    <!-- Modal Visualizar -->
+    <section>
+        <center>
+            <div id="modalVisualizar" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="fecharModal('modalVisualizar')">&times;</span>
+                    <!-- Conteúdo do modal aqui -->
+                    <h2>Detalhes do Veículo</h2>
+                    <br>
+                    <p id="detalhesVeiculo">Placa: 1234567<br>Tipo: Motocicleta<br>Vaga: 1 andar<br>Hora de Entrada: 12:00</p>
+                    <img class="modal-img" src="{% static "img/carwoman.png" %}">
+                </div>
+            </div>
+
+            <!-- Modal Deletar -->
+            <div id="modalDeletar" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="fecharModal('modalDeletar')">&times;</span>
+                    <!-- Conteúdo do modal aqui -->
+                    <h2>Despachar Veículo</h2>
+                    <br>
+                    <p>Tem certeza que deseja despachar este veículo?</p>
+
+                    <img class="modal-img" src="{% static "img/park.png" %}">
+                    <br>
+                    <button onclick="deletar(1234567); fecharModal('modalDeletar')">Confirmar</button>
+                </div>
+            </div>
+        </center>
+    </section>
+
+    <script>
+                // A função para abrir o modal de visualização
+        function abrirModalVisualizar() {
+            var modal = document.getElementById('modalVisualizar');
+            modal.style.display = "block";
+            
+            // Preencha o conteúdo do modal com os detalhes do veículo (se desejar)
+            document.getElementById('detalhesVeiculo').innerHTML = "Placa: 1234567<br>Tipo: Motocicleta<br>Vaga: 1 andar<br>Hora de Entrada: 12:00";
+        }
+
+        // A função para abrir o modal de deleção
+        function abrirModalDeletar() {
+            var modal = document.getElementById('modalDeletar');
+            modal.style.display = "block";
+        }
+
+        // Função para fechar qualquer modal com base no ID fornecido
+        function fecharModal(id) {
+            var modal = document.getElementById(id);
+            modal.style.display = "none";
+        }
+
+        // Event Listener para fechar modais ao clicar fora do conteúdo
+        window.addEventListener('click', function(event) {
+            var modais = document.querySelectorAll('.modal');
+            for (var i = 0; i < modais.length; i++) {
+                var modal = modais[i];
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var modais = document.querySelectorAll('.modal');
+            modais.forEach(function(modal) {
+                modal.style.display = "none";
+            });
+        });
+        
+
+        
+    </script>
+</body>
+
+</html>

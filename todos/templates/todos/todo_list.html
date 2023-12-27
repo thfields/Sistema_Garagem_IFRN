@@ -32,26 +32,26 @@
                 <tr>
                     <th>Placa</th>
                     <th>Tipo de Veículo</th>
-                    <th>Vaga</th>
+                    <th>Andar</th>
                     <th>Hora de Entrada</th>
                     <th>Hora de Saída</th>
                     <th>Ações</th> <!-- Coluna adicional para os botões -->
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1234567</td>
-                    <td>Motocicleta</td>
-                    <td>1 andar</td>
-                    <td>12:00</td>
-                    <td>...</td>
-                    <td>
-                        <i class="ph ph-eye" onclick="abrirModalVisualizar()"></i>
-                        <i class="ph ph-x-circle" onclick="abrirModalDeletar()"></i>
-
-                        
-                    </td>
-                </tr>
+                {% for todo in todo_list %}
+                    <tr>
+                        <td>{{ todo.placa }}</td>
+                        <td>{{ todo.tipo }}</td>
+                        <td>{{ todo.andar }}</td>
+                        <td>{{ todo.hora_entrada }}</td>
+                        <td>{{ todo.hora_saida }}</td>
+                        <td>
+                            <!--<i class="ph ph-eye" onclick="abrirModalVisualizar()"></i>-->
+                            <a class="btn btn-danger btn-sm" href="{% url "todo_saida" pk=todo.placa %}">Despachar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
                 <!-- Adicione mais linhas conforme necessário -->
             </tbody>
         </table>
@@ -69,7 +69,7 @@
                     <h2>Detalhes do Veículo</h2>
                     <br>
                     <p id="detalhesVeiculo">Placa: 1234567<br>Tipo: Motocicleta<br>Vaga: 1 andar<br>Hora de Entrada: 12:00</p>
-                    <img class="modal-img" src="img/carwoman.png" alt="">
+                    <img class="modal-img" src="{% static "img/carwoman.png" %}">
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
                     <br>
                     <p>Tem certeza que deseja despachar este veículo?</p>
 
-                    <img class="modal-img" src="img/park.png" alt="">
+                    <img class="modal-img" src="{% static "img/park.png" %}">
                     <br>
                     <button onclick="deletar(1234567); fecharModal('modalDeletar')">Confirmar</button>
                 </div>

@@ -1,23 +1,17 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" type="text/css" href="{% static 'todos/form.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
     <!-- Incluindo o Bootstrap CSS -->
-    
-
     <title>Safe Car - Adicionar</title>
 </head>
-
 <body class="corpo">
     <header class="cabeca">
         <a href="{% url "home" %}" class="logo">Safe Car</a>
@@ -27,17 +21,17 @@
             <li><a href="{% url "todo_create" %}">Adicionar novo veículo</a></li>
         </ul>
     </header>
-
-
-
     <section class="formulario">
-        <form action="" method="POST">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <!--
             <label>
-                <input type="text"  placeholder="Placa" required>
+                <input type="text"  placeholder="Placa" name="placa" required>
             </label>
     
 
-            <label for="opcao">
+            <label for="opcao" name="tipo">
             <select id="opcao" required>
                 <option value="" disabled selected>Selecione o tipo de veículo</option>
                 <option value="opcao1">Motocicleta</option>
@@ -46,7 +40,7 @@
             </label>
     
 
-            <label for="opcao">
+            <label for="opcao" name="andar">
                 <select id="opcao" required>
                     <option value="" disabled selected>Vagas</option>
                     <option value="opcao1">1° Andar</option>
@@ -54,23 +48,17 @@
                     <option value="opcao3">3° Andar</option>
                 </select>
             </label>
-            
-    
+            -->
+           <!-- 
             <label class="datetime">
                 <input type="datetime-local" required>
             </label>
-            
+             -->
             <br>
-    
             <button type="submit">Adicionar Veículo</button>
         </form>
-        
-        <img src="img/istock.png" alt="">
+        <img src="{% static "img/istock.png" %}">
     </section>
-
-
     <span class="rodape">Desenvolvido por 👽&🐢</span>
-
 </body>
-
 </html>
