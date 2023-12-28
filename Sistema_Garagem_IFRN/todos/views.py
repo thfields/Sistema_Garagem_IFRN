@@ -78,6 +78,15 @@ class TodoCreateView(CreateView):
         
         return self.form_invalid(form)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        andar1 = get_object_or_404(Constante, pk=1)
+        andar2 = get_object_or_404(Constante, pk=2)
+        context['vagas_andar1'] = andar1.carro + andar1.moto
+        context['vagas_andar2'] = andar2.carro + andar2.moto
+        return context
+
+    
     
 
 class UpdateHoraAndarView(View):

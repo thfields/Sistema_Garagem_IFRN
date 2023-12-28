@@ -124,3 +124,25 @@ button {
 button:hover {
     background-color: var(--main-color);
 }
+
+
+.vagas-disponiveis {
+    margin-top: 20px; /* Espaço acima do elemento */
+    padding: 55px;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: grid;
+}
+
+.vagas-disponiveis h3 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    color: var(--main-color);
+}
+
+.vagas-disponiveis p {
+    padding-left: 65%;
+    margin: 5px 0;
+    font-size: 1.4em;
+    color: var(--text-color);
+}

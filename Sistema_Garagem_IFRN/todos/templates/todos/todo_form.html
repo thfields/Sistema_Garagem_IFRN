@@ -31,10 +31,18 @@
                         {% for error in field.errors %}
                             {{ error }}
                         {% endfor %}
+                        
                     </div>
                 {% endif %}
                 <br>
+                
             {% endfor %}
+            <section class="vagas-disponiveis">
+                <h3>Vagas Disponíveis:</h3>
+                <p>1 Andar: {{ vagas_andar1 }}</p>
+                <p>2 Andar: {{ vagas_andar2 }}</p>
+            </section>
+            
             <button type="submit">Adicionar Veículo</button>
         </form>
         <img src="{% static "img/istock.png" %}">
